@@ -1,46 +1,23 @@
 class IsbnVerifier {
 
     boolean isValid(String stringToVerify) {
-
-         if (!stringToVerify.matches("[0-9X-]+")) {
-             return false;
-         }
-
-         stringToVerify = stringToVerify.replaceAll("-", "");
-         int length = stringToVerify.length();
-
-         if (length != 10) {
-             return false;
-         }
-
-         if (stringToVerify.indexOf('X') != length - 1 && stringToVerify.indexOf('X') != -1) {
-             return false;
-         }
-
-
-        int[] nums = new int[10];
-        int j = nums.length - 1;
         int sum = 0;
+        int pos = 10;
 
-        for (int i = 0; i < stringToVerify.toCharArray().length; i++) {
-            char c = stringToVerify.charAt(i);
-            if (c == '-')
+        for (char c: stringToVerify.toCharArray()) {
+            if (Character.isDigit(c)) {
+                sum += (c - '0') * pos;
+                pos--;
+            } else if (c == '-') {
                 continue;
-            else if (c == 'X') {
-                nums[j] = 10;
+            } else if (c == 'X' && pos == 1) {
+                sum += 10;
+                pos--;
             } else {
-                nums[j] = c - 48;
+                return false;
             }
-            j--;
-            if (j < 0)
-                break;
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i] * (i + 1);
-        }
-
-        return sum % 11 == 0;
+        return pos == 0 && sum % 11 == 0;
     }
-
 }
