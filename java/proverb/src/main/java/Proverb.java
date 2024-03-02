@@ -1,20 +1,24 @@
 class Proverb {
 
     private String proverb = "";
-    String[] words;
-    String[] lines = {
+    private final String[] lines = {
             "And all for the want of a %s.",
-            "For want of a %s the %s was lost."
+            "For want of a %s the %s was lost.\n"
     };
 
     Proverb(String[] words) {
-        this.words = words;
-        if (words.length > 0) {
-            for (int i = 1; i < words.length; i++) {
-                proverb += String.format(lines[1], words[i - 1], words[i]) + "\n";
-            }
-            proverb += String.format(lines[0], words[0]);
+
+        StringBuilder sb = new StringBuilder();
+        if (words.length == 0) {
+            return;
         }
+        
+        for (int i = 1; i < words.length; i++) {
+            sb.append(String.format(lines[1], words[i - 1], words[i]));
+        }
+
+        sb.append(String.format(lines[0], words[0]));
+        proverb = sb.toString();
     }
 
     String recite() {
