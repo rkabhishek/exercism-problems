@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.time.Month;
 
 class AppointmentScheduler {
     public LocalDateTime schedule(String appointmentDateDescription) {
@@ -23,6 +25,6 @@ class AppointmentScheduler {
     }
 
     public LocalDate getAnniversaryDate() {
-        throw new UnsupportedOperationException("Please implement the AppointmentScheduler.getAnniversaryDate() method");
+        return LocalDate.of(LocalDate.now().getYear(), Month.SEPTEMBER, 15);
     }
 }
