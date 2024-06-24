@@ -7,6 +7,9 @@ class HighScores {
     private final List<Integer> highScores;
 
     public HighScores(List<Integer> highScores) {
+        if (highScores == null || highScores.isEmpty())
+            throw new IllegalArgumentException("List of scores can not be null or empty");
+
         this.highScores = highScores;
     }
 
