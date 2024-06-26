@@ -1,25 +1,44 @@
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 class SumOfMultiples {
 
-    private int sum;
-    private final Set<Integer> multiples;
+    private final int sum;
 
     SumOfMultiples(int number, int[] set) {
-        multiples = new HashSet<>();
+        Set<Integer> multiples = new HashSet<>();
 
         for (int i : set) {
-            for (int j = 1; j < number; j++) {
-                if (i != 0 && j % i == 0 && !multiples.contains(j)) {
-                    multiples.add(j);
-                    sum += j;
-                }
-            }
+            multiples.addAll(findMultiplesBelow(i, number));
         }
+
+        sum = sumOfElements(multiples);
     }
 
     int getSum() {
+        return sum;
+    }
+
+    private List<Integer> findMultiplesBelow(int base, int limit) {
+        List<Integer> multiples = new ArrayList<>();
+
+        if (base != 0) {
+            for (int i = base; i < limit; i += base) {
+                multiples.add(i);
+            }
+        }
+
+        return multiples;
+    }
+
+    private int sumOfElements(Set<Integer> set) {
+        int sum = 0;
+        for(int num: set) {
+            sum += num;
+        }
+
         return sum;
     }
 }
