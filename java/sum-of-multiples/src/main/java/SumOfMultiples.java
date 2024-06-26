@@ -22,12 +22,13 @@ class SumOfMultiples {
     }
 
     private List<Integer> findMultiplesBelow(int base, int limit) {
-        List<Integer> multiples = new ArrayList<>();
+        if (base == 0) {
+            return List.of();
+        }
 
-        if (base != 0) {
-            for (int i = base; i < limit; i += base) {
-                multiples.add(i);
-            }
+        List<Integer> multiples = new ArrayList<>();
+        for (int i = base; i < limit; i += base) {
+            multiples.add(i);
         }
 
         return multiples;
